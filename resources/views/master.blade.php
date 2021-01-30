@@ -12,8 +12,16 @@
 </head>
 
 <body class="antialiased">
-<div id="app">
+    <v-app id="app">
+        <app>
+            @yield('content')
+        </app>
+    </v-app>
 
-</div>
+    <script src="{{ mix('/js/manifest.js') }}"></script>
+    <script src="{{ mix('/js/vendor.js') }}"></script>
+    <script src="{{ mix('/js/bootstrap.js') }}"></script>
+    @stack('js')
+
 </body>
 </html>
