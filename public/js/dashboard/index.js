@@ -64,7 +64,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Assets"
+  name: "Assets",
+  data: function data(_) {
+    return {
+      assets: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    console.log('Im not nuts');
+    Echo.channel('assets').listen('LedgerUpdated', function (e) {
+      console.log(e);
+      _this.assets = e.assets;
+    });
+    setTimeout(function () {
+      axios.get('/api/assets');
+    }, 2000);
+  }
 });
 
 /***/ }),
@@ -331,7 +348,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-card", [_vm._v("\n    etxtxtxt\n")])
+  return _c("v-card", [_vm._v("\n    " + _vm._s(_vm.assets) + "\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
