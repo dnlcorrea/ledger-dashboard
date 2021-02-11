@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ART=/home/daniel/ledger-dashboard/artisan
+
+php $ART serve &
+
+php $ART websockets:serve &
+
+find ~/finance/2021 -iname '*.ledger' | entr php ~/ledger-dashboard/artisan ledger:notify &
