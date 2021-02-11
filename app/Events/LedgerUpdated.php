@@ -17,7 +17,7 @@ class LedgerUpdated implements ShouldBroadcastNow
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $assets;
+    public $assets, $liabilities;
 
     /**
      * Create a new event instance.
@@ -27,6 +27,7 @@ class LedgerUpdated implements ShouldBroadcastNow
     public function __construct()
     {
         $this->assets = Assets::totals();
+        $this->liabilities = ['foo' => '$0.02'];
     }
 
     /**
@@ -36,7 +37,6 @@ class LedgerUpdated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-
         return new Channel('assets');
     }
 }

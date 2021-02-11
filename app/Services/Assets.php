@@ -3,17 +3,21 @@
 
 namespace App\Services;
 
-use App\DataObjects\Assets as Data;
-
 class Assets
 {
 
     public static function totals()
     {
-        $arr = [];
-        exec('ledger bal Assets', $arr);
+        exec('ledger --no-total bal Assets', $arr);
 
-        return new Data($arr);
+        $final = [];
+
+        foreach ($arr as $line) {
+            [$value, $asset] = preg_split('/  +/', trim($line));
+
+            $final[$asset] = $value;
+        }
+
+        return $final;
     }
-
 }

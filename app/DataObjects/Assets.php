@@ -10,7 +10,11 @@ class Assets
    public function __construct($assets)
    {
        $this->assets = collect($assets)->map(function ($line) {
-           return preg_split('/ +/', trim($line));
+           [$asset, $value] = preg_split('/ +/', trim($line));
+
+           return [$asset, $value];
+       })->reject(function ($line) {
+           return in_array('--------------------', $line);
        });
    }
 }

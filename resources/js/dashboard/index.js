@@ -5,6 +5,6 @@ new Vue({
     vuetify,
     components: {
         app: require('../../components/App.vue').default,
-        assets: require('../../components/dashboard/Assets.vue').default
+        tabular: require('../../components/dashboard/Tabular.vue').default
     }
 }).$mount('#app')
